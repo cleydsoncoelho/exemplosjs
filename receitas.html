@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        const receitas = [
+            {
+                titulo: "Bolo de Cenoura",
+                imagem: "img/bolodecenoura.jpg",
+                preparo: "Misture todos os ingredientes e asse por 40 minutos a 180°C.",
+                ingredientes: [
+                    "2 cenouras grandes",
+                    "3 ovos",
+                    "1 xícara de óleo",
+                    "2 xícaras de açúcar",
+                    "2 xícaras de farinha de trigo",
+                    "1 colher de sopa de fermento em pó"
+                ]
+            },
+            {
+                titulo: "Macarrão à Carbonara",
+                imagem: "img/macarrao.jpg",
+                preparo: "Cozinhe o macarrão, frite o bacon, misture com o ovo e queijo.",
+                ingredientes: [
+                    "200g de macarrão",
+                    "100g de bacon",
+                    "2 ovos",
+                    "50g de queijo parmesão",
+                    "Sal a gosto",
+                    "Pimenta do reino"
+                ]
+            },
+            {
+                titulo: "Frango ao Curry",
+                imagem: "img/frangoaocurry.jpg",
+                preparo: "Refogue o frango com cebola e especiarias, adicione leite de coco.",
+                ingredientes: [
+                    "500g de peito de frango",
+                    "1 cebola",
+                    "2 colheres de sopa de curry",
+                    "400ml de leite de coco",
+                    "Sal e pimenta a gosto",
+                    "Coentro para decorar"
+                ]
+            },
+            {
+                titulo: "Pão de Queijo",
+                imagem: "img/paodequeijo.jpg",
+                preparo: "Misture todos os ingredientes e asse por 25 minutos a 180°C.",
+                ingredientes: [
+                    "250g de polvilho doce",
+                    "100ml de leite",
+                    "100ml de óleo",
+                    "1 ovo",
+                    "150g de queijo parmesão",
+                    "Sal a gosto"
+                ]
+            },
+            {
+                titulo: "Sopa de Legumes",
+                imagem: "img/sopadelegumes.jpg",
+                preparo: "Cozinhe os legumes com água e temperos até ficarem macios.",
+                ingredientes: [
+                    "2 cenouras",
+                    "1 batata",
+                    "1 abobrinha",
+                    "1 cebola",
+                    "2 dentes de alho",
+                    "Sal e pimenta a gosto"
+                ]
+            }
+        ];
+
+        function getListaIngredientes(receita) {
+            let texto = "<ul>";
+            texto += receita.ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).reduce((acc, item) => acc + item, "");
+            texto += "</ul>";
+            return texto;
+        }
+
+        function getCard(receita) {
+            return `
+                <div class="card" style="width: 250px; margin: 10px;">
+                    <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}" style="height: 150px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">${receita.titulo}</h5>
+                        <p class="card-text">${receita.preparo}</p>
+                        <p class="card-text justify-content"><strong>Ingredientes:</strong></p>
+                        ${getListaIngredientes(receita)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById("pnlCatalogo");
+            receitas.forEach(receita => {
+                const card = getCard(receita);
+                pnlCatalogo.innerHTML += card;
+            });
+        }
+    </script>
+</head>
+
+<body onload="preencheCatalogo()" class="bg-warning">
+    <div class="container-fluid">
+        <h1 class="text-center">Catálogo de Receitas</h1>
+        <div class="d-flex justify-content-center">
+            <div id="pnlCatalogo" class="d-flex flex-wrap justify-content-center">
+                <!-- Os cards das receitas serão preenchidos aqui -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
